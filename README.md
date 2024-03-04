@@ -14,8 +14,9 @@ Check out the [`.github/workflows/basic.yml`](https://github.com/Dovyski/setup-o
 | `opencv-extra-modules` | If [opencv-contrib](https://github.com/opencv/opencv_contrib) (extra modules) should be included in the instalation. | `true` |
 | `install-deps` | If dependencies should be installed as well, e.g. libs, cmake, etc. | `true` |
 | `CMAKE_BUILD_TYPE` | | `RELEASE` |
+| `CMAKE_CXX_STANDARD` | | `11` |
 | `CMAKE_CXX_COMPILER` | | `g++` |
-| `CMAKE_INSTALL_PREFIX` | | `/usr/local` |
+| `CMAKE_INSTALL_PREFIX` | | Linux, MacOS : `/usr/local`<br>Windows : `C:/opencv` |
 | `WITH_TBB` | | `ON` |
 | `WITH_IPP` | | `ON` |
 | `BUILD_NEW_PYTHON_SUPPORT` | | `OFF` |
