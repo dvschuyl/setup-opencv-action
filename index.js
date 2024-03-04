@@ -15,6 +15,7 @@ async function run_linux() {
         const installDeps = core.getInput('install-deps') == undefined || core.getInput('install-deps') == 'true';
 
         const CMAKE_CXX_COMPILER         = core.getInput('CMAKE_CXX_COMPILER');
+        const CMAKE_CXX_STANDARD         = core.getInput('CMAKE_CXX_STANDARD');
         const CMAKE_INSTALL_PREFIX       = core.getInput('CMAKE_INSTALL_PREFIX');
         const WITH_TBB                   = core.getInput('WITH_TBB');
         const WITH_IPP                   = core.getInput('WITH_IPP');
@@ -61,6 +62,7 @@ async function run_linux() {
       
         const cmakeCmd = 'cmake -S opencv -B opencv/build ' +
             ' -D CMAKE_CXX_COMPILER=' + CMAKE_CXX_COMPILER + 
+            ' -D CMAKE_CXX_STANDARD=' + CMAKE_CXX_STANDARD + 
             ' -D CMAKE_INSTALL_PREFIX=' + CMAKE_INSTALL_PREFIX +
             ' -D WITH_TBB=' + WITH_TBB + 
             ' -D WITH_IPP=' + WITH_IPP + 
@@ -108,6 +110,7 @@ async function run_macos() {
         const installDeps = core.getInput('install-deps') == undefined || core.getInput('install-deps') == 'true';
 
         const CMAKE_CXX_COMPILER         = core.getInput('CMAKE_CXX_COMPILER');
+        const CMAKE_CXX_STANDARD         = core.getInput('CMAKE_CXX_STANDARD');
         const CMAKE_INSTALL_PREFIX       = core.getInput('CMAKE_INSTALL_PREFIX');
         const WITH_TBB                   = core.getInput('WITH_TBB');
         const WITH_IPP                   = core.getInput('WITH_IPP');
@@ -138,6 +141,7 @@ async function run_macos() {
       
         const cmakeCmd = 'cmake -S opencv -B opencv/build ' +
             ' -D CMAKE_CXX_COMPILER=' + CMAKE_CXX_COMPILER + 
+            ' -D CMAKE_CXX_STANDARD=' + CMAKE_CXX_STANDARD + 
             ' -D CMAKE_INSTALL_PREFIX=' + CMAKE_INSTALL_PREFIX +
             ' -D WITH_TBB=' + WITH_TBB + 
             ' -D WITH_IPP=' + WITH_IPP + 
@@ -184,6 +188,7 @@ async function run_windows() {
         const installDeps = core.getInput('install-deps') == undefined || core.getInput('install-deps') == 'true';
 
         const CMAKE_CXX_COMPILER         = core.getInput('CMAKE_CXX_COMPILER');
+        const CMAKE_CXX_STANDARD         = core.getInput('CMAKE_CXX_STANDARD');
         let CMAKE_INSTALL_PREFIX       = core.getInput('CMAKE_INSTALL_PREFIX');
         if(CMAKE_INSTALL_PREFIX == '/usr/local') {
             CMAKE_INSTALL_PREFIX = 'C:/opencv';
@@ -236,7 +241,7 @@ async function run_windows() {
             ' -D WITH_IPP=' + "OFF" + 
             ' -D BUILD_NEW_PYTHON_SUPPORT=' + BUILD_NEW_PYTHON_SUPPORT +
             ' -D WITH_V4L=' + WITH_V4L +
-            ' -D CMAKE_CXX_STANDARD=11' +
+            ' -D CMAKE_CXX_STANDARD=' + CMAKE_CXX_STANDARD + 
             ' -D ENABLE_PRECOMPILED_HEADERS=' + "OFF" +
             ' -D INSTALL_C_EXAMPLES=' + INSTALL_C_EXAMPLES +
             ' -D INSTALL_PYTHON_EXAMPLES=' + INSTALL_PYTHON_EXAMPLES +

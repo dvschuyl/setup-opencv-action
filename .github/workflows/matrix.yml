@@ -9,6 +9,7 @@ jobs:
       matrix:
         os: [ 'ubuntu-20.04', 'macos-latest', 'windows-latest' ]
         opencv: [ '3.4.10', '4.0.0' ]
+        cpp: ['11', '14', '17']
     steps:
       - uses: actions/checkout@v2
       - name: Setup OpenCV ${{ matrix.opencv }}
@@ -18,3 +19,4 @@ jobs:
           WITH_IPP: if ${{ matrix.os }} == 'windows-latest' then 'OFF' else 'ON'
           WITH_TBB: if ${{ matrix.os }} == 'windows-latest' then 'OFF' else 'ON'
           ENABLE_PRECOMPILED_HEADERS: if ${{ matrix.os }} == 'windows-latest' then 'OFF' else 'ON'
+          CMAKE_CXX_STANDARD: ${{ matrix.cpp }}

@@ -22,6 +22,9 @@ inputs:
   CMAKE_CXX_COMPILER:
     default: g++
     required: false
+  CMAKE_CXX_STANDARD:
+    default: 11
+    required: false
   CMAKE_INSTALL_PREFIX:
     default: /usr/local
     required: false
