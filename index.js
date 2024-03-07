@@ -53,10 +53,12 @@ async function run_linux() {
         }
 
         core.startGroup('Download source code');
-        await exec.exec(`git clone https://github.com/opencv/opencv.git --branch ${version} --depth 1`);
+        await exec.exec(`git clone https://github.com/opencv/opencv.git`);
+        await exec.exec(`git -C opencv checkout ${version}`);
 
         if(extraModules) {
-            await exec.exec(`git clone https://github.com/opencv/opencv_contrib.git --branch ${version} --depth 1`);
+            await exec.exec(`git clone https://github.com/opencv/opencv_contrib.git`);
+            await exec.exec(`git -C opencv_contrib checkout ${version}`);
         }
         core.endGroup();
       
@@ -132,10 +134,12 @@ async function run_macos() {
         }
 
         core.startGroup('Download source code');
-        await exec.exec(`git clone https://github.com/opencv/opencv.git --branch ${version} --depth 1`);
+        await exec.exec(`git clone https://github.com/opencv/opencv.git`);
+        await exec.exec(`git -C opencv checkout ${version}`);
 
         if(extraModules) {
-            await exec.exec(`git clone https://github.com/opencv/opencv_contrib.git --branch ${version} --depth 1`);
+            await exec.exec(`git clone https://github.com/opencv/opencv_contrib.git`);
+            await exec.exec(`git -C opencv_contrib checkout ${version}`);
         }
         core.endGroup();
       
@@ -227,10 +231,12 @@ async function run_windows() {
         }
 
         core.startGroup('Download source code');
-        await exec.exec(`git clone https://github.com/opencv/opencv.git --branch ${version} --depth 1` , [], options);
+        await exec.exec(`git clone https://github.com/opencv/opencv.git`);
+        await exec.exec(`git -C opencv checkout ${version}`);
 
         if(extraModules) {
-            await exec.exec(`git clone https://github.com/opencv/opencv_contrib.git --branch ${version} --depth 1` , [], options);
+            await exec.exec(`git clone https://github.com/opencv/opencv_contrib.git`);
+            await exec.exec(`git -C opencv_contrib checkout ${version}`);
         }
         core.endGroup();
       

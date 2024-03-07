@@ -7,21 +7,33 @@ jobs:
     name: Test the action on ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ 'ubuntu-20.04', 'macos-latest', 'windows-latest' ]
-        opencv: [ '4.0.0', '4.6.0' ]
+        os: ["ubuntu-20.04", "macos-latest", "windows-latest"]
+        opencv: ["4.0.0", "4.6.0"]
         include:
-          - opencv: '4.0.0'
-            cpp: '14'
-          - opencv: '4.6.0'
-            cpp: '17'
-            
+          - opencv: "4.0.0"
+            cpp: "14"
+          - opencv: "4.6.0"
+            cpp: "17"
+
     steps:
       - uses: actions/checkout@v2
-      - name: Setup OpenCV ${{ matrix.opencv }} (c++${{ matrix.cpp }})
+      # WINDOWS
+      - name: Setup OpenCV ${{ matrix.opencv }} (c++${{ matrix.cpp }}) for Windows
+        if: ${{ matrix.os == 'windows-latest'}}
         uses: ./ # Uses an action in the root directory
         with:
           opencv-version: ${{ matrix.opencv }}
-          WITH_IPP: if ${{ matrix.os }} == 'windows-latest' then 'OFF' else 'ON'
-          WITH_TBB: if ${{ matrix.os }} == 'windows-latest' then 'OFF' else 'ON'
-          ENABLE_PRECOMPILED_HEADERS: if ${{ matrix.os }} == 'windows-latest' then 'OFF' else 'ON'
+          WITH_IPP: "OFF"
+          WITH_TBB: "OFF"
+          ENABLE_PRECOMPILED_HEADERS: "OFF"
+          CMAKE_CXX_STANDARD: ${{ matrix.cpp }}
+      # MACOS and LINUX
+      - name: Setup OpenCV ${{ matrix.opencv }} (c++${{ matrix.cpp }}) for MacOS or Linux
+        if: ${{ matrix.os != 'windows-latest' }}
+        uses: ./ # Uses an action in the root directory
+        with:
+          opencv-version: ${{ matrix.opencv }}
+          WITH_IPP: "ON"
+          WITH_TBB: "ON"
+          ENABLE_PRECOMPILED_HEADERS: "ON"
           CMAKE_CXX_STANDARD: ${{ matrix.cpp }}
