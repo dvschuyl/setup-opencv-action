@@ -3,25 +3,18 @@ on: push
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    name: Test the action on ${{ matrix.os }}
     strategy:
       matrix:
         os: ["ubuntu-20.04", "macos-latest", "windows-latest"]
         opencv: ["3.4.10", 4.0.0", "4.6.0"]
-        # An error in opencv 4.6.0 with c++17 on MacOS prevents us from testing this build
-        # cpp: ["11", "14", "17"]
-        include:
-          - opencv: "3.4.10"
-            cpp: "11"
-          - opencv: "4.0.0"
-            cpp: "14"
-          - opencv: "4.6.0"
-            os: "ubuntu-20.04"
+        cpp: ["11", "14", "17"]
+        exclude:
+          # An error in OpenCV for c++17 on MacOS prevents us from testing this build
+          - os: "macos-latest"
             cpp: "17"
-          - opencv: "4.6.0"
-            os: "windows-latest"
-            cpp: "17"
+
+    runs-on: ${{ matrix.os }}
+    name: Test the action on ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v2
